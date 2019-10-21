@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+		<style>
+			div#newCss {
+				border: 1px solid #999;
+				width: 504px;
+				height: 140px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h4>px样式</h4>
+		<textarea id="css" cols="60" rows="10"></textarea>
+		<br />
+		<input type="button" value="px转换rpx" onclick="px2rpx()" />
+		<h4>转换后的样式</h4>
+		<div id="newCss"></div>
+		<script type="text/javascript">
+			function px2rpx() {
+				var oldCss = document.getElementById("css").value.trim(); //".similar_recommend .title{margin:.3px 0 0;padding-top:.4px;color:#666;font-size:.28px;}"
+				//对原样式根据px进行拆分成数组，这样除了最后一个元素，数组前边的几个元素都是以原px样式数值结尾
+				//拆分后的格式：[".similar_recommend{background:#fff;border-radius:.1", ";height:7.4", ";margin-top:-.3", "}"]
+				var newCssArr = oldCss.split("px")
+				var newCss = "" //转换后新的样式变量
+				for(var i in newCssArr) {
+					if(i < newCssArr.length - 1) {
+						//非最后一个元素，对字符串按照:再次拆分，把px样式的数值分离出来进行转换
+						var str = newCssArr[i]
+						var idx = str.lastIndexOf(':')
+						var prevStr = str.substring(0, idx + 1)
+						var nextStr = "" //nextStr格式为    -.3 , -3 , 3 , .3
+						if(str.indexOf('-.') > -1) {
+							//nextStr格式为-.3px或-3px
+							nextStr = str.substring(str.indexOf(':-') + 2, str.length)
+							//nextStr格式为.3px或3px
+							if(nextStr.indexOf('.') > -1) {
+								nextStr = "0" + nextStr
+							}
+							nextStr = "-" + parseInt(nextStr * 2) + "rpx"
+						} else {
+							nextStr = str.substring(idx + 1, str.length).trim()
+							//处理 nextStr="1px .2"的情况
+							var index = nextStr.indexOf(' ')
+							if(index >= 0) {
+								let arr = nextStr.split(' ')
+								let str1 = arr[0]
+								let str2 = arr[1]
+								str2 = str2.indexOf('.') > -1 ? "0" + str2 : str2
+								str2 = parseInt(str2 * 2) + "rpx"
+								nextStr = str1 + ' ' + str2
+							} else {
+								nextStr = nextStr.indexOf('.') > -1 ? "0" + nextStr : nextStr
+								nextStr = parseInt(nextStr * 2) + "rpx"
+							}
+						}
+
+						//重组数组内的样式字符串
+						newCss += prevStr + "" + nextStr
+					} else {
+						//追加最后一个数组元素
+						newCss += newCssArr[i]
+					}
+				}
+				document.getElementById("newCss").innerHTML = newCss
+			}
+		</script>
+	</body>
+
+</html>
