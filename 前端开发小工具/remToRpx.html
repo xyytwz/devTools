@@ -59,7 +59,7 @@
 								nextStr = str1 + ' ' + str2
 							} else {
 								if(nextStr.indexOf('.')==0) nextStr = "0" + nextStr//.1的情况,0.1则不处理
-								nextStr = parseInt(nextStr * ratio) + "rpx"
+								nextStr =' '+ parseInt(nextStr * ratio) + "rpx"
 							}
 						}
 

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+		<title></title>
+	</head>
+
+	<body>
+		<h4>html代码</h4>
+		<textarea id="html" cols="200" rows="10"></textarea>
+		<br />
+		<input type="button" value="点击转换" onclick="trans()" />
+		<h4>axml</h4>
+		<textarea id="axml" cols="200" rows="10"></textarea>
+		<script type="text/javascript">
+			function trans() {
+				var html = $("#html").val()
+				html = html.replace(/<(div|p) /g, "<view ")
+					.replace(/<\/(div|p)>/g, "</view>")
+					.replace(/<span /g, "<text ")
+					.replace(/<\/span>/g, "</text>")
+					.replace(/<a /g, "<navigator ")
+					.replace(/<\/a>/g, "</navigator>")
+					.replace(/<img /g,"<image ")
+					.replace(/@click/g,"onTap")
+					.replace('v-if="','a:if="{{')
+				$("#axml").val(html)
+				//1. 解决 image标签添加结尾
+				//2. 解决a:if条件添加}}
+				
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+		<title></title>
+	</head>
+
+	<body>
+		<h4>html代码</h4>
+		<textarea id="params" cols="200" rows="5"></textarea>
+		<textarea id="key" cols="200" rows="5"></textarea>
+		<br />
+		<input type="button" value="点击转换" onclick="trans()" />
+		<h4>axml</h4>
+		<textarea id="axml" cols="200" rows="10"></textarea>
+		<script type="text/javascript">
+			function trans() {
+				var str = $("#params").val(),
+						str2 = $("#key").val();
+				var arr=str.split(","),
+					arr2=str2.split(","),
+					newStr = ''
+				arr.forEach((item,index) => {
+					let s = `data-${arr2[index].trim()}="{{${item}}}" `
+					newStr += s;
+				})
+				$("#axml").val(newStr)
+				//1. 解决 image标签添加结尾
+				//2. 解决a:if条件添加}}
+
+			}
+		</script>
+	</body>
+
+</html>
