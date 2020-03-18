@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      .bgItem {
+        background: #f6f6f6;
+        padding: 10px;
+      }
+      /*加价购示例*/
+      
+      .webkitBox {
+        display: -webkit-box;
+        -webkit-box-orient: horizontal;
+        -webkit-box-align: center;
+        width: 300px;
+      }
+      
+      .webkitBox span {
+        display: inline-block;
+        height: 26px;
+        width: 80px;
+        border-radius: 2px;
+        text-align: center;
+        font-size: 12px;
+        line-height: 26px;
+        color: #fff;
+        background-color: #ff6242;
+      }
+      
+      .webkitBox p {
+        font-size: 12px;
+        color: #333;
+        margin-left: .4rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        -webkit-box-flex: 1;
+      }
+      /*超出缩略显示*/
+      
+      .ellipsis {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      /*换行*/
+      
+      .white-space {
+        margin-top: 10px;
+        width: 300px;
+        /* normal: 默认。空白会被浏览器忽略。 */
+        white-space: normal;
+        /*nowrap: 文本不会换行，文本会在在同一行上继续，直到遇到 br 标签为止。*/
+        white-space: nowrap;
+        /*空白会被浏览器保留。其行为方式类似 HTML 中的 pre 标签。*/
+        white-space: pre;
+        /* pre-line: 合并空白符序列，但是保留换行符。 */
+        white-space: pre-line;
+        /* pre-wrap: 保留空白符序列，但是正常地进行换行。 */
+        white-space: pre-wrap;
+      }
+      /*是否允许浏览器在单词内进行断句*/
+      /*这是为了防止当一个字符串太长而找不到它的自然断句点时产生溢出现象。*/
+      
+      .word-wrap {
+        margin-top: 10px;
+        width: 400px;
+        /*在长单词或 URL 地址内部进行换行（拆分长单词）*/
+        word-wrap: break-word;
+        /*只在允许的断字点换行（浏览器保持默认处理）。*/
+        word-wrap: normal;
+      }
+      /*单词内的断句*/
+      
+      .word-break {
+        margin-top: 10px;
+        width: 300px;
+        /*全部换行*/
+        word-break: break-all;
+        /*只能在半角空格或连字符处换行。*/
+        word-break: keep-all;
+        /*使用浏览器默认的换行规则。*/
+        word-break: normal;
+      }
+      
+      /*示例*/
+       .word{background:#E4FFE9;width:250px;margin:50px auto;padding:20px;font-family:"microsoft yahei";}
+      /* 强制不换行 */
+      .nowrap{white-space:nowrap;}
+      /* 允许单词内断句，首先会尝试挪到下一行，看看下一行的宽度够不够，
+      不够的话就进行单词内的断句 */
+      .breakword{word-wrap: break-word;}
+      /* 断句时，不会把长单词挪到下一行，而是直接进行单词内的断句 */
+      .breakAll{word-break:break-all;}            
+      /* 超出部分显示省略号 */
+      .ellipsis{text-overflow:ellipsis;overflow:hidden;}
+    </style>
+    <title>CSS自动换行、强制不换行、强制断行、超出显示省略号</title>
+  </head>
+
+  <body>
+    <div class="webkitBox bgItem">
+      <span>加价购</span>
+      <p>测试商品标题超出省略测试商品标题超出省略测试商品标题超出省略测试商品标题超出省略</p>
+    </div>
+    <h3>ellipsis</h3>
+    <p class="ellipsis" style="width:300px;height: 30px;">
+      p标签超出省略:测试商品标题超出省略测试商品标题超出省略测试商品标题超出省略测试商品标题超出省略
+    </p>
+    <h3>white-space</h3>
+    <div class="white-space">
+      测试商品标题超出省略测试商品标题超出省略long word abcdfdfsdfdsfdfasdfasd测试商品标题超出省略测试商品标题超出省略
+    </div>
+    <h3>word-wrap</h3>
+    <div class="word-wrap">
+      测试商品标题超出省略测试商品标题超出省略long wordddddd abcdfdfsdfdsfdfasdfasd测试商品标题超出省略测试商品标题超出省略
+    </div>
+    <h3>word-break</h3>
+    <div class="word-break">
+      测试商品标题超出省略测试商品标题超出省略long wordddddd abcdfdfsdfdsfdfasdfasd测试商品标题超出省略测试商品标题超出省略
+    </div>
+    <h3>示例</h3>
+    <div class="word">
+      <b>强制不换行</b>
+      <p class="nowrap">wordwrap:breakword;absavhsafhuafdfbjhfvsalguvfaihuivfs</p>
+      <b>允许单词内断句，首先会尝试挪到下一行，看看下一行的宽度够不够，
+    不够的话就进行单词内的断句</b>
+      <p class="breakword">wordwrap:break-word;absavhsafhuafdfbjhfvsalguvfaihui</p>
+      <b>断句时，不会把长单词挪到下一行，而是直接进行单词内的断句</b>
+      <p class="breakAll">wordwrap:break-word;absavhsafhuafdfbjhfvsalguvfaihuivf</p>
+      <b>normal</b>
+      <p class="normal">wordwrap:breakword;absavhsafhuafdfbjhfvsalguvfaihuivfsa</p>
+      <b>超出部分显示省略号</b>
+      <p class="ellipsis">wordwrap:breakword;absavhsafhuafdfbjhfvsalguvfaihuivfsab</p>
+    </div>
+  </body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+		<style>
+			div#excel {
+				border: 1px solid #999;
+				width: 504px;
+				height: 140px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<textarea id="excel" cols="60" rows="10"></textarea>
+		<br />
+		<input type="button" value="转换" onclick="exchange()" />
+		<textarea id="array" cols="60" rows="10"></textarea>
+		<script type="text/javascript">
+		  function exchange(){
+  			var excelData=$("#excel").val()
+  			var listArr=excelData.split('\n')
+  			listArr.forEach((item,index)=>{
+  			  if(item){
+  			    console.log(item.trim())
+  			    var  itemArr=item.split('    ')//非空格，表格数据粘贴到控制台后显示的间隔
+  			    console.log(itemArr)
+  			  }
+  			})
+			}
+		</script>
+	</body>
+
+</html>

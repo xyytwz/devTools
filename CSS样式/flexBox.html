@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      div {
+        word-break: break-all;
+      }
+      
+      .box {
+        width: 80%;
+        height: 300px;
+        border: 2px solid #2af;
+        display: flex;    /*子元素居中*/   
+        flex-wrap:wrap;           /*子元素溢出换行*/  
+        /*弹性盒子元素在主轴（横轴）方向上的对齐方式*/       
+        justify-content: flex-end;/*子元素靠右*/
+        justify-content: flex-start;/*子元素靠左*/
+        justify-content: inherit;
+        justify-content: initial;
+        justify-content: space-around;/*子元素两边都有间隔_o__o__o_*/
+        justify-content: space-between;/*子元素之间有间隔    o__o__o*/        
+        justify-content:flex-end; /*水平防线对齐方式*/
+        /*设置弹性盒子元素在侧轴（纵轴）方向上的对齐方式*/
+        align-items:flex-start;     /*垂直方向对齐方式*/
+        /*修改 flex-wrap 属性的行为，类似 align-items, 但不是设置子元素对齐，而是设置行对齐*/
+        align-content:flex-end;   /*总体内容对齐方式*/
+        flex-direction: row-reverse;/*水平反转*/
+      }
+      
+      .boxItem {
+        display: inline-block;
+        background: #f2a;
+        width: 30%;
+        height: 100px;
+        flex:auto;/*弹性子元素分配空间 -平均分配*/
+        flex:1;/*弹性子元素分配空间 指定比例*/
+        margin: 10px;/*周围边距10px*/
+      }
+      .first{
+        order:1;
+        margin: auto;/*居中*/
+        margin: 10px;/*周围边距10px*/
+        align-self:flex-start;  /*子元素垂直方向底部对齐*/
+        flex:2;
+      }
+    </style>
+    <title>弹性盒子</title>
+  </head>
+
+  <body>
+    <div class="box">
+      <div class="boxItem">111</div>
+      <div class="boxItem first">2225555555555555555555555555555555</div>
+      <div class="boxItem">333</div>
+      <div class="boxItem">333</div>
+    </div>
+  </body>
+
+</html>

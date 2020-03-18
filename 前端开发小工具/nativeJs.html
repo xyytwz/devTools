@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1,user-scalable=0">
+		<script type="text/javascript" src="https://h5.e-buygifts.cn/car/js/flexible.js"></script>
+		<script>
+			var _hmt = _hmt || [];
+			(function() {
+				var hm = document.createElement("script");
+				hm.src = "https://hm.baidu.com/hm.js?31b4840f89f6c7452c67b2ce3006c679";
+				var s = document.getElementsByTagName("script")[0];
+				s.parentNode.insertBefore(hm, s);
+			})();
+		</script>
+
+		<style type="text/css">
+			html, body {
+				margin: 0px;
+				padding: 0px;
+				width: 100%;
+				height: 100%;
+			}
+			
+			body {
+				line-height: 1.6;
+				font-family: -apple-system-font, Helvetica Neue, sans-serif;
+				overflow-x: hidden;
+				font-size: .24rem;
+				-webkit-overflow-scrolling: touch;
+				background: #f5f5f5;
+				-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+			}
+			
+			p {
+				margin: 0;
+				padding: 0;
+			}
+			
+			button, input {
+				margin: 0px;
+				padding: 0;
+				border: none;
+				appearance: none;
+				-webkit-appearance: none;
+				outline: 0!important;
+				box-sizing: border-box;
+			}
+			
+			::-webkit-input-placeholder {
+				/* WebKit, Blink, Edge */
+				color: #ddd;
+			}
+			
+			:-moz-placeholder {
+				/* Mozilla Firefox 4 to 18 */
+				color: #ccc;
+			}
+			
+			::-moz-placeholder {
+				/* Mozilla Firefox 19+ */
+				color: #ccc;
+			}
+			
+			:-ms-input-placeholder {
+				/* Internet Explorer 10-11 */
+				color: #ccc;
+			}
+			
+			input#date {
+				background: none;
+			}
+			
+			i {
+				font-style: normal;
+			}
+			
+			#app {
+				font-size: .24rem;
+				height: 100%;
+				position: relative;
+				overflow: hidden;
+			}
+			
+			#content .input_box {
+				background: #ffffff;
+			}
+			
+			#content .input_box .item {
+				border-bottom: 1px solid #f5f5f5;
+				margin-left: .3rem;
+			}
+			
+			#content .input_box p {
+				height: 1.1rem;
+				line-height: 1.1rem;
+				overflow: hidden;
+				box-sizing: border-box;
+				vertical-align: middle;
+			}
+			
+			#content .input_box p span {
+				display: inline-block;
+				color: #4a4a4a;
+				font-weight: bold;
+				width: 1.25rem;
+				font-size: .30rem;
+				vertical-align: middle;
+			}
+			
+			#content .input_box p input {
+				color: #4a4a4a;
+				width: 4rem;
+				font-size: .30rem;
+				line-height: .6rem;
+				padding: .1rem;
+				margin: .1rem;
+				vertical-align: middle;
+			}
+			
+			#read_info_protect {
+				font-size: .24rem;
+				line-height: .6rem;
+				padding: .06rem .3rem;
+				border-top: .2rem solid #f5f5f5;
+				color: #888;
+			}
+			
+			#read_info_protect p {
+				line-height: 1.5!important;
+				height: auto;
+			}
+			/*按钮样式*/
+			
+			#btn_box {
+				text-align: center;
+			}
+			
+			#applyBtn {
+				margin: .2rem .18rem;
+				width: 4.5rem;
+				height: .9rem;
+				border-radius: 5px;
+				background: #138de9;
+				margin-top: .4rem;
+				color: #fff;
+				font-size: .34rem;
+			}
+		</style>
+		<script type="text/javascript">
+			var $ = document.querySelectorAll.bind(document);
+			/**
+			 * 模拟ajax请求
+			 */
+			function ajax() {
+				var ajaxData = {
+					type: arguments[0].type || "GET",
+					url: arguments[0].url || "",
+					async: arguments[0].async || "true",
+					data: arguments[0].data || null,
+					dataType: arguments[0].dataType || "json",
+					contentType: arguments[0].contentType || "application/x-www-form-urlencoded",
+					beforeSend: arguments[0].beforeSend || function() {},
+					success: arguments[0].success || function() {},
+					error: arguments[0].error || function() {}
+				}
+				ajaxData.beforeSend()
+				var xhr = createxmlHttpRequest();
+				xhr.responseType = ajaxData.dataType;
+				xhr.open(ajaxData.type, ajaxData.url, ajaxData.async);
+				xhr.setRequestHeader("Content-Type", ajaxData.contentType);
+				xhr.send(convertData(ajaxData.data));
+				xhr.onreadystatechange = function() {
+					if(xhr.readyState == 4) {
+						if(xhr.status == 200) {
+							ajaxData.success(xhr.response)
+						} else {
+							ajaxData.error()
+						}
+					}
+				}
+			}
+
+			function createxmlHttpRequest() {
+				if(window.ActiveXObject) {
+					return new ActiveXObject("Microsoft.XMLHTTP");
+				} else if(window.XMLHttpRequest) {
+					return new XMLHttpRequest();
+				}
+			}
+
+			function convertData(data) {
+				if(typeof data === 'object') {
+					var convertResult = "";
+					for(var c in data) {
+						convertResult += c + "=" + data[c] + "&";
+					}
+					convertResult = convertResult.substring(0, convertResult.length - 1)
+					return convertResult;
+				} else {
+					return data;
+				}
+			}
+		</script>
+		<script>
+			// var apiUrl = "http://test.e-buygifts.cn"
+			// var apiUrl = "http://139.196.254.221:7030"
+			var selectedRadio = true;
+			/**
+			 * 提交按钮单击事件
+			 */
+			function applyBtn() {
+				var name = document.getElementById("name").value.trim();
+				var phone = document.getElementById("tel").value.trim()
+				var orderNo = document.getElementById("orderNo").value.trim()
+				var tipMsg = "不能为空~",
+					telReg = /^1\d{10}$/
+//				if(!name) {
+//					toast("姓名" + tipMsg)
+//					document.getElementById("name").focus()
+//					return;
+//				} else if(!phone) {
+//					toast("手机号" + tipMsg)
+//					document.getElementById("tel").focus()
+//					return;
+//				} else if(!orderNo) {
+//					toast("订单号" + tipMsg)
+//					document.getElementById("orderNo").focus()
+//					return;
+//				}
+
+				var params = {
+					name: name,
+					phone: phone,
+					orderNo: orderNo
+				}
+				ajax({
+					type: "POST",
+					url: "http://man.e-buygifts.cn:7030/user/authcode?phone=11111111111",//"/car/refund/apply",
+					contentType: 'application/json; charset=utf-8',
+					data: JSON.stringify(params),
+					success: function(data) {
+						if(data.s == 0) {
+							toast("提交成功");
+						}
+					},
+					error: function() {
+						toast("error");
+					}
+				})
+
+			}
+		</script>
+
+		<title>原生js封装</title>
+	</head>
+
+	<body>
+		<div id="app">
+			<div id="content">
+				<div class="input_box">
+					<p class="item"><span>姓名</span><input type="text" id="name" maxlength="50" required placeholder="请输入您的姓名" /></p>
+					<p class="item"><span>手机号</span><input type="tel" id="tel" maxlength="11" required placeholder="请输入您的联系方式" /></p>
+					<p class="item"><span>订单号</span><input type="text" id="orderNo" required placeholder="请输入订单号" /></p>
+				</div>
+
+				<div id="read_info_protect">
+					<p>服务提示：退款申请提交成功后将会在3-7个工作日内将金额退回至您的支付账户中</p>
+				</div>
+
+				<div id="btn_box"><button id="applyBtn" onclick="applyBtn()">提交申请</button></div>
+				<div id="btn_box"><button id="applyBtn" onclick='toast("提交成功")'>toast</button></div>
+				<div id="btn_box"><button id="applyBtn" onclick="showLoading()">loading</button></div>
+				<div id="btn_box">
+					<button id="applyBtn" onclick='showModal({title: " 温馨提示 ",content : "请填写提示内容 "})'>modal</button></div>
+			</div>
+			<!--toast module start-->
+			<style>
+				/*toast样式*/
+				#toast {
+					visibility: hidden;
+					position: fixed;
+					width: 100%;
+					top: 50%;
+					left: 0;
+					text-align: center;
+					transition: opacity .5s;
+					-webkit-transition: opacity .5s;
+					/* Safari */
+					opacity: 0;
+					z-index: 9999;
+				}
+				
+				#toast>span {
+					padding: .2rem .3rem;
+					background: rgba(0, 0, 0, 0.6);
+					border-radius: .08rem;
+					color: #ffffff;
+					font-size: .32rem;
+					margin: 0 1rem;
+					display: inline-block;
+				}
+			</style>
+			<script>
+				/**
+				 * 封装toast提示
+				 */
+				function toast(txt) {
+					var toast = $("#toast")[0]
+					var span = $("#toast span")[0]
+					if(toast && span) {
+						toast.style.visibility = "visible"
+						toast.style.opacity = "1"
+						span.innerText = txt
+						setTimeout(function() {
+							toast.style.opacity = "0"
+							toast.style.visibility = "hidden"
+							span.innerText = ""
+						}, 2000)
+					}
+
+				}
+			</script>
+			<section class="toast" id="toast">
+				<span></span>
+			</section>
+			<!--toast module end-->
+			<!--loading module start-->
+			<style>
+				.loading {
+					position: fixed;
+					width: 100%;
+					height: 100%;
+					background: rgba(0, 0, 0, .3);
+					top: 0;
+					left: 0;
+					opacity: 0;
+					visibility: hidden;
+					z-index: 999;
+				}
+				
+				.loading_content {
+					-webkit-transition-duration: .2s;
+					transition-duration: .2s;
+					top: 45%;
+					position: fixed;
+					width: 2.4rem;
+					min-height: 2.4rem;
+					left: 50%;
+					margin-left: -1.2rem;
+					background: hsla(0, 0%, 7%, .7);
+					text-align: center;
+					border-radius: .1rem;
+					color: #fff;
+				}
+				
+				.loading_icon {
+					display: inline-block;
+					-webkit-animation: weuiLoading 1s steps(12, end) infinite;
+					animation: weuiLoading 1s steps(12, end) infinite;
+					background: transparent url("data:image/svg+xml;charset=utf8, %3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 100 100' %3E%3Cpath fill='none' d='M0 0h100v100H0z' /%3E%3Crect width='7' height='20' x='46.5' y='40' fill='%23E9E9E9' rx='5' ry='5' transform='translate(0 -30)' /%3E%3Crect width='7' height='20' x='46.5' y='40' fill='%23989697' rx='5' ry='5' transform='rotate(30 105.98 65)' /%3E%3Crect width='7' height='20' x='46.5' y='40' fill='%239B999A' rx='5' ry='5' transform='rotate(60 75.98 65)' /%3E%3Crect width='7' height='20' x='46.5' y='40' fill='%23A3A1A2' rx='5' ry='5' transform='rotate(90 65 65)' /%3E%3Crect width='7' height='20' x='46.5' y='40' fill='%23ABA9AA' rx='5' ry='5' transform='rotate(120 58.66 65)' /%3E%3Crect width='7' height='20' x='46.5' y='40' fill='%23B2B2B2' rx='5' ry='5' transform='rotate(150 54.02 65)' /%3E%3Crect width='7' height='20' x='46.5' y='40' fill='%23BAB8B9' rx='5' ry='5' transform='rotate(180 50 65)' /%3E%3Crect width='7' height='20' x='46.5' y='40' fill='%23C2C0C1' rx='5' ry='5' transform='rotate(-150 45.98 65)' /%3E%3Crect width='7' height='20' x='46.5' y='40' fill='%23CBCBCB' rx='5' ry='5' transform='rotate(-120 41.34 65)' /%3E%3Crect width='7' height='20' x='46.5' y='40' fill='%23D2D2D2' rx='5' ry='5' transform='rotate(-90 35 65)' /%3E%3Crect width='7' height='20' x='46.5' y='40' fill='%23DADADA' rx='5' ry='5' transform='rotate(-60 24.02 65)' /%3E%3Crect width='7' height='20' x='46.5' y='40' fill='%23E2E2E2' rx='5' ry='5' transform='rotate(-30 -5.98 65)' /%3E%3C/svg%3E ") no-repeat;
+					background-size: 100%;
+					font-size: 1.1rem;
+					color: white;
+					margin: .6rem 0 0;
+					width: .72rem;
+					height: .72rem;
+					vertical-align: baseline;
+				}
+				
+				@-webkit-keyframes weuiLoading {
+					0% {
+						-webkit-transform: rotate3d(0, 0, 1, 0deg);
+						transform: rotate3d(0, 0, 1, 0deg);
+					}
+					100% {
+						-webkit-transform: rotate3d(0, 0, 1, 360deg);
+						transform: rotate3d(0, 0, 1, 360deg);
+					}
+				}
+				
+				@keyframes weuiLoading {
+					0% {
+						-webkit-transform: rotate3d(0, 0, 1, 0deg);
+						transform: rotate3d(0, 0, 1, 0deg);
+					}
+					100% {
+						-webkit-transform: rotate3d(0, 0, 1, 360deg);
+						transform: rotate3d(0, 0, 1, 360deg);
+					}
+				}
+				
+				.loading_msg {
+					font-size: .32rem;
+				}
+			</style>
+			<script>
+				/**
+				 * 显示loading
+				 */
+				function showLoading() {
+					var node = $(".loading")[0]
+					node.style.visibility = "visible"
+					node.style.opacity = "1"
+				}
+				/**
+				 * 隐藏loading
+				 */
+				function hideLoading() {
+					var node = $(".loading ")[0]
+					node.style.visibility = "hidden"
+					node.style.opacity = "0"
+				}
+			</script>
+			<section class="loading">
+				<div class="loading_content">
+					<div class="loading_head"><i class="loading_icon"></i></div>
+					<p class="loading_msg">数据加载中</p>
+				</div>
+			</section>
+			<!--loading module end-->
+
+			<!--modal-->
+			<style>
+				#iosDialog {
+					opacity: 0;
+					display: none;
+				}
+				
+				.weui-mask {
+					position: fixed;
+					z-index: 1000;
+					top: 0;
+					right: 0;
+					left: 0;
+					bottom: 0;
+					background: rgba(0, 0, 0, 0.6);
+				}
+				
+				.weui-dialog {
+					position: fixed;
+					z-index: 5000;
+					width: 80%;
+					max-width: 300px;
+					top: 50%;
+					left: 50%;
+					-webkit-transform: translate(-50%, -50%);
+					transform: translate(-50%, -50%);
+					background-color: #FFFFFF;
+					text-align: center;
+					border-radius: 3px;
+					overflow: hidden;
+				}
+				
+				.weui-dialog__hd {
+					padding: 1.3em 1.6em 0.5em;
+				}
+				
+				.weui-dialog__title {
+					font-weight: 400;
+					font-size: 18px;
+				}
+				
+				.weui-dialog__bd {
+					padding: 0 1.6em 0.8em;
+					min-height: 40px;
+					font-size: 15px;
+					line-height: 1.3;
+					word-wrap: break-word;
+					word-break: break-all;
+					color: #808080;
+				}
+				
+				.weui-dialog__ft {
+					position: relative;
+					line-height: 48px;
+					font-size: 18px;
+					display: -webkit-box;
+					display: -webkit-flex;
+					display: flex;
+				}
+				
+				.weui-dialog__btn {
+					display: block;
+					-webkit-box-flex: 1;
+					-webkit-flex: 1;
+					flex: 1;
+					color: #09BB07;
+					text-decoration: none;
+					-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+					position: relative;
+				}
+				
+				.weui-dialog__btn_default {
+					color: #353535;
+				}
+				
+				.weui-dialog__btn_primary {
+					color: #09BB07;
+				}
+				
+				.weui-dialog__btn:after {
+					content: " ";
+					position: absolute;
+					left: 0;
+					top: 0;
+					width: 1px;
+					bottom: 0;
+					border-left: 1px solid #D5D5D6;
+					color: #D5D5D6;
+					-webkit-transform-origin: 0 0;
+					transform-origin: 0 0;
+					-webkit-transform: scaleX(0.5);
+					transform: scaleX(0.5);
+				}
+				
+				.weui-dialog__ft:after {
+					content: " ";
+					position: absolute;
+					left: 0;
+					top: 0;
+					right: 0;
+					height: 1px;
+					border-top: 1px solid #D5D5D6;
+					color: #D5D5D6;
+					-webkit-transform-origin: 0 0;
+					transform-origin: 0 0;
+					-webkit-transform: scaleY(0.5);
+					transform: scaleY(0.5);
+				}
+			</style>
+			<script>
+				/**
+				 * 显示loading
+				 */
+				function showModal({
+					title = "温馨提示 ",
+					content = "请填写提示内容 ",
+					success
+				}) {
+					var node = $("#iosDialog")[0]
+					node.style.display = "block"
+					node.style.opacity = "1"
+					$(".weui-dialog__title")[0].innerText = title
+					$(".weui-dialog__bd")[0].innerText = content
+
+					$(".weui-dialog__btn_primary")[0].onclick = function() {
+						if(success) {
+							success()
+						}
+						modalCancel();
+					}
+				}
+				/**
+				 * 隐藏loading
+				 */
+				function modalCancel() {
+					var node = $("#iosDialog")[0]
+					node.style.display = "none"
+					node.style.opacity = "0"
+				}
+			</script>
+			<div class="js_dialog" id="iosDialog" style="opacity: 0; ">
+				<div class="weui-mask "></div>
+				<div class="weui-dialog ">
+					<div class="weui-dialog__hd "><strong class="weui-dialog__title "></strong></div>
+					<div class="weui-dialog__bd "></div>
+					<div class="weui-dialog__ft ">
+						<a href="javascript:; " class="weui-dialog__btn weui-dialog__btn_default " onclick="modalCancel() ">取消</a>
+						<a href="javascript:; " class="weui-dialog__btn weui-dialog__btn_primary ">确定</a>
+					</div>
+				</div>
+			</div>
+			<!--modal dend-->
+	</body>
+
+</html>

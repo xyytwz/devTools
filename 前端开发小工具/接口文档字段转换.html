@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="./js/jquery.min.js"></script>
+
+    <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+    <script src="./js/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="./js/bootstrap.min.js"></script>
+    <link href="./css/pub.css" rel="stylesheet">
+    <title></title>
+  </head>
+
+  <body>
+    <div id="navLeft" class="w200"></div>
+    <div id="Content">
+      <div id="navTop" class="borderB"></div>
+      <h3 id="pageTitle" class="lh20">接口文档url转换为键值对格式 </h3>
+      <div id="pageContent">
+        <!-- <form role="form"> -->
+        <div class="form-group">
+          <label>适用场景</label>
+          <span class="help-block">将接口文档中的接口地址URL进行提取、转换、合成键值对格式的对象，以便封装调用。可以根据实际需要对合成后的变量名进行修改。</span>
+          <pre>
+module.exports = {
+  goodsIndexad: "goods/indexad",
+  goodsItemlist: "goods/itemlist",
+  ......
+}
+</pre>
+        </div>
+        <div class="form-group">
+          <label for="pubUrlStr">公共路径</label>
+          <p>
+            <input id="pubUrlStr" type="text" class="form-control w400" id="name" placeholder="请输入需要过滤掉的公共路径" />
+          </p>
+        </div>
+        <div class="form-group">
+          <label for="apiUrl">接口URL（回车换行）</label>
+          <textarea id="apiUrl" class="form-control" rows="8"></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="apiUrlTrans()" data-toggle="modal" data-target="#myModal" placeholder="请输入接口文档中的接口url路径，不同接口换行输入">转换</button>
+        <!-- </form> -->
+        <!-- 模态框 -->
+        <div class="modal fade" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <!-- 模态框头部 -->
+              <div class="modal-header">
+                <h4 class="modal-title">模态框头部</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+
+              <!-- 模态框主体 -->
+              <div class="modal-body">
+                模态框内容..
+              </div>
+
+              <!-- 模态框底部 -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    var {
+      log
+    } = console
+    // $(function() {
+    //   $("#navLeft").load("temp/navLeft.html");
+    //   $("#navTop").load("temp/pubTools.html");
+    // })
+    //apiUrl转换			
+    function apiUrlTrans() {
+      var pubUrlStr = $("#pubUrlStr").val(), //服务器地址公共的路径，需要删除掉
+        apiUrl = $("#apiUrl").val(), //api路径
+        urlArr = [], //api路径按/拆分后的数组
+        newApiUrl = ''; //新合成的url键值对列表
+      if (!apiUrl) {
+        $("#apiUrl").focus()
+        $("[data-toggle='popover']").popover('show')
+        setTimeout(() => {
+          $("[data-toggle='popover']").popover('hide')
+        }, 2000)
+        return;
+      }
+      //对换行输入的接口url根据换行拆分成数组，再根据单个url
+      urlArr = apiUrl.trim().split(/[\n,]/g);
+      urlArr.forEach((item, index) => {
+        if (!item) return;
+        let urlItem = '',
+          urlKey = '',
+          urlValue = '';
+        urlValue = item.trim().replace(' ', '').replace(pubUrlStr, ''); //删除公共路径
+        urlKey = urlToCamel(urlValue) //将路径分段拼接成变量名
+        log(urlKey)
+        newApiUrl += `${urlKey}:"${urlValue}"${index==(urlArr.length-1)?"//":",//\n"}` //追加键值对
+      })
+      newApiUrl = `module.exports = {\n${newApiUrl}\n}`
+      $(".modal-body").html(newApiUrl)
+    }
+    //根据url路径按驼峰命名法合成变量名称
+    function urlToCamel(e) {
+      let arr = e.split('/'),
+        newUrl = '';
+      arr.forEach((item, index) => {
+        newUrl += index == 0 ? item : (item.charAt(0).toUpperCase() + item.slice(1))
+      })
+      return newUrl;
+    }
+  </script>
+
+</html>

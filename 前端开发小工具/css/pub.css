@@ -1,0 +1,60 @@
+/*盒子布局*/
+.show,.block {display:block}
+.hide {display:none}
+.iblock {display:inline-block}
+.w750 {width:100%}
+.fr{float: right;}
+.cb{clear: both;}
+.borderT{border-top:1px solid #eeeeee;}
+.borderB{border-bottom:1px solid #eeeeee;}
+.vc {vertical-align:middle!important;display: inline-block!important;}
+.vc_flex{display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;}
+.pFixed{position: fixed!important;}
+.pAbsolute{position: absolute!important;}
+.pRelative{position: relative!important;}
+/*文本样式*/
+.tc {text-align:center}
+.bold {font-weight:bold}
+.bold5 {font-weight:500}
+.bold6 {font-weight:600}
+.red {color:#ff3d00}
+.blue{color:#0084e3}
+.c_6 {color:#666}
+.c_3{color:#333;}
+.c_8{color:#888;}
+.c_9 {color:#999}
+.c_f{color:white!important}
+.c_c{color:#ccc!important}
+.lh1{line-height: 1;}
+.lh12{line-height: 1.2;}
+.lh15{line-height: 1.5}
+.lh20{line-height: 2}
+.lh30{line-height: 3}
+.lh40{line-height: 4}
+.lh50{line-height: 5}
+.lh60{line-height: 6}
+.circle{border-radius: 100%;}
+/*公用组件*/
+.btnPrimary {background:#1f90e6!important;color:#fff!important;border: none!important;border-radius: 5px;text-align: center;}
+.btnPrimary_plain {background:#ffffff!important;color:#1f90e6!important;border: 1px solid #1f90e6!important;border-radius: 5px;text-align: center;}
+.btnDisable {background:#F8F8F8!important;color:#ccc!important;text-align: center;}
+.bgWhite {background:#fff}
+html,body{height: 100%;}
+body{display: flex;}
+h1,h2,h3,h4,h5,h6{margin:0;padding: 0;}
+.w100 {width: 100px;}
+.w200 {width: 200px;}
+.w300 {width: 300px;}
+.w400 {width: 400px;}
+.h100 {height: 100px;}	
+	
+#navLeft{height: 100%;}
+#Content{width:100%;padding-left:20px;}
+#navLeft .nav {background: #337ab7;color: white;height: 100%;}
+#navLeft .nav>li>a{color: white;}
+#navLeft .nav>li>a:focus,#navLeft .nav>li>a:hover {text-decoration: none;	background-color: #2af;}
+#navLeft .nav .open>a,#navLeft .nav .open>a:focus,#navLeft .nav .open>a:hover {background-color: #2af;}
+#navLeft .dropdown-menu{top:0;left:171px;}
+#navTop{height: 50px;}
+#pageTitle{box-shadow:0 5px 5px #22AAFF;box-shadow: 5px 7px 8px -10px #a5a5a5;padding-right:30px}
+#pageContent{padding: 20px;}
